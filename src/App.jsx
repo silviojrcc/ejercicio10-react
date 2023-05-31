@@ -1,13 +1,19 @@
 import './App.css'
 import Formulario from './components/Formulario';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container } from 'react-bootstrap';
 
 function App() {
 
   return (
     <>
-      <h1>Alta de películas</h1>
-      <Formulario></Formulario>
+      <div>
+      <Container>
+        <h1 className='text-light m-3'>Administrador películas</h1>
+        <Formulario></Formulario>
+
+      </Container>
+    </div>
     </>
   )
 }
