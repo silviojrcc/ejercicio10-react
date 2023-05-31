@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Form, FormLabel, Button } from 'react-bootstrap';
 import ListaPeliculas from './ListaPeliculas';
 const Formulario = () => {
 
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
+    const [peliculas, setPeliculas] = useState([]);
+
+    const onSubmit = (data) => {
+        setPeliculas([...peliculas, data]);
+        console.log(peliculas);
+        reset();
+    }
 
     return (
         <>
@@ -13,7 +20,7 @@ const Formulario = () => {
                     <h2>Llenar el formulario para crear una pelicula</h2>
                 </div>
                 <div className='p-5 bg-dark'>
-                    <Form>
+                    <Form onSubmit={handleSubmit(onSubmit)}>
                         <div className='row mb-4'>
                             <FormLabel className='col-md-3'>Nombre:</FormLabel>
                             <input className='col-md-9' placeholder='nombre de película' type='text' {...register("nombre", {
@@ -35,13 +42,11 @@ const Formulario = () => {
                                 required: true,
                                 maxLength: 100,
                                 minLength: 20,
-                                pattern: /^[A-Za-zÁÉÍÓÚáéíóúñÑ\s]+$/u
                             })}></textarea>
                             <div className='error-container'>
                                 {errors.descripcion?.type === "required" && <div className='error-msg'>Debe ingresar una descripcion</div>}
                                 {errors.descripcion?.type === "maxLength" && <div className='error-msg'>La descripcion no debe superar los 100 caracteres</div>}
                                 {errors.descripcion?.type === "minLength" && <div className='error-msg'>La descripcion debe ser de mas de 20 caracteres</div>}
-                                {errors.descripcion?.type === "pattern" && <div className='error-msg'>Debe ingresar una descripcion válida</div>}
                             </div>
                         </div>
                         <div className='row mb-4'>
@@ -58,7 +63,7 @@ const Formulario = () => {
                         <div><Button type="submit">Enviar</Button></div>
                     </Form>
                 </div>
-                <ListaPeliculas></ListaPeliculas>
+                <ListaPeliculas peliculas={peliculas}></ListaPeliculas>
             </div>
         </>
     );
