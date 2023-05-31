@@ -9,7 +9,12 @@ const Formulario = () => {
 
     useEffect(() => {
         localStorage.setItem("peliculas", JSON.stringify(peliculas));
-    }, [peliculas])
+    }, [peliculas]);
+
+    const borrarPelicula = (peliculaABorrar) => {
+        const nuevoArrayPeliculas = peliculas.filter((pelicula) => pelicula.nombre !== peliculaABorrar.nombre);
+        setPeliculas(nuevoArrayPeliculas);
+    }
     
 
     const onSubmit = (data) => {
@@ -69,7 +74,7 @@ const Formulario = () => {
                         <div><Button type="submit">Enviar</Button></div>
                     </Form>
                 </div>
-                <ListaPeliculas peliculas={peliculas}></ListaPeliculas>
+                <ListaPeliculas peliculas={peliculas} borrarPelicula={borrarPelicula}></ListaPeliculas>
             </div>
         </>
     );
