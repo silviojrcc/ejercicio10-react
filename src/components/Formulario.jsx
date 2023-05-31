@@ -1,17 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { Form, FormLabel, Button } from 'react-bootstrap';
 import ListaPeliculas from './ListaPeliculas';
 const Formulario = () => {
 
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
-    const [peliculas, setPeliculas] = useState([]);
+    const [peliculas, setPeliculas] = useState(JSON.parse(localStorage.getItem("peliculas")) || []);
+
+    useEffect(() => {
+        localStorage.setItem("peliculas", JSON.stringify(peliculas));
+    }, [peliculas])
+    
 
     const onSubmit = (data) => {
         setPeliculas([...peliculas, data]);
         console.log(peliculas);
         reset();
     }
+
 
     return (
         <>
