@@ -1,6 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Form, FormLabel, Button } from 'react-bootstrap';
+import ListaPeliculas from './ListaPeliculas';
 const Formulario = () => {
 
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
@@ -57,6 +58,7 @@ const Formulario = () => {
                         <div><Button type="submit">Enviar</Button></div>
                     </Form>
                 </div>
+                <ListaPeliculas></ListaPeliculas>
             </div>
         </>
     );
