@@ -1,0 +1,24 @@
+#root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(27, 47, 47);
+    box-sizing: border-box;
+}
+  
+.main {
+    flex-grow: 1;
+}
+
+.form-title {
+    background-color: rgb(21, 10, 10);
+}
+
+.error-container {
+    display: block;
+    height: 20px;
+}
+
+.error-msg {
+    color: red;
+}
